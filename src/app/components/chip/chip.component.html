@@ -1,0 +1,10 @@
+<div class="centered-container">
+    <mat-chip-listbox>
+        <mat-chip-option *ngFor="let search of dynamicSearch; let last = last" [selected]="last" (click)="onChipClick(search)">
+            {{ search }}
+        </mat-chip-option>
+        <button mat-icon-button matSuffix *ngIf="dynamicSearch.length > 0" (click)="clearChips()" class="clear-button">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-chip-listbox>
+</div>

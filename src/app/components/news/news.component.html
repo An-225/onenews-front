@@ -1,0 +1,48 @@
+<div *ngIf="showCards" class="news-container" [class.dark-theme]="isDarkTheme">
+    <div class="centered-container">
+        <ng-container *ngIf="displayedArticles && displayedArticles.length > 0; else noResults">
+            <mat-card *ngFor="let article of displayedArticles" class="centered-card card-with-margin" [class.dark-theme]="isDarkTheme" (click)="redirectToDetail(article)">
+                <mat-card-header class="dark-theme">
+                    <mat-card-title>{{ article.title }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dark-theme">
+                    <div class="flex-container">
+                        <div class="text-container">
+                            <p style="margin-top: 15px;">{{ article.description }}</p>
+                            <div class="info-container">
+                                <div style="margin-top: 35px;margin-bottom: 0px;">
+                                    <span style="font-weight: bold;">Author: </span>
+                                    <span>{{ article.author }}</span>
+                                </div>
+                                <div style="margin-bottom: 0px;">
+                                    <span style="font-weight: bold;">Source: </span>
+                                    <span>{{ article.url }}</span>
+                                </div>
+                                <div style="margin-bottom: 0px;">
+                                    <span style="font-weight: bold;">Published: </span>
+                                    <span>{{ article.publishedAt | dateFormat }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-container" *ngIf="article.urlToImage">
+                            <img style="max-width: 150px; font-weight: bold;" [src]="article.urlToImage">
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
+        <ng-template #noResults>
+            <div class="no-results-message">
+                Não foram encontrados resultados para a sua pesquisa.
+            </div>
+        </ng-template>
+        <div class="centered-container fixed-pagination" *ngIf="articles && articles.length > 0">
+            <mat-paginator 
+                [length]="articles.length" 
+                [pageSize]="pageSize" 
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="onPageChange($event)">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+.dark-theme {
+    --primary-light: #2196f3;
+    --accent-light: #ff4081;
+    --warn-light: #f44336;
+
+    --primary-dark: #3f51b5;
+    --accent-dark: #ff9800;
+    --warn-dark: #e91e63;
+
+    --background-color: #121212; 
+    --text-color: #ffffff; 
+}
+
+.dark-theme .centered-container {
+    background-color: var(--background-color);
+    color: var(--text-color);
+ }
+
+ .dark-theme .home-container {
+    background-color: var(--background-color);
+    color: var(--text-color);
+ }
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
