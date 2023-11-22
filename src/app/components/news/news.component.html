@@ -1,6 +1,6 @@
 <div *ngIf="showCards" class="news-container" [class.dark-theme]="isDarkTheme">
     <div class="centered-container">
-        <ng-container *ngIf="displayedArticles && displayedArticles.length > 0; else noResults">
+        <ng-container *ngIf="displayedArticles && displayedArticles.length > 0">
             <mat-card *ngFor="let article of displayedArticles" class="centered-card card-with-margin" [class.dark-theme]="isDarkTheme" (click)="redirectToDetail(article)">
                 <mat-card-header class="dark-theme">
                     <mat-card-title>{{ article.title }}</mat-card-title>
@@ -31,11 +31,9 @@
                 </mat-card-content>
             </mat-card>
         </ng-container>
-        <ng-template #noResults>
-            <div class="no-results-message">
-                Não foram encontrados resultados para a sua pesquisa.
-            </div>
-        </ng-template>
+        <div class="no-results-message" *ngIf="showMessageDisplay">
+            Não foram encontrados resultados para a sua pesquisa.
+        </div>
         <div class="centered-container fixed-pagination" *ngIf="articles && articles.length > 0">
             <mat-paginator 
                 [length]="articles.length" 

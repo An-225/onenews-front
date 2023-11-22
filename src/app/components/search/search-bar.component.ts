@@ -2,6 +2,7 @@ import { Component, HostListener, ViewChild } from '@angular/core';
 import { SharedService } from '../../services/shared-service.service';
 import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { SearchService } from 'src/app/services/search.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'search',
@@ -41,8 +42,10 @@ export class SearchBarComponent {
     }
 
     this.showProgressBar = true;
+    let from = moment().subtract(30, 'days').format('YYYY-MM-DD');
+    let to = moment().format('YYYY-MM-DD');
 
-    this.searchService.searchTopic(this.searchText, '2023-11-11', '2023-11-13').subscribe((data: any) => {
+    this.searchService.searchTopic(this.searchText, from, to).subscribe((data: any) => {
       const status = data.status;
 
       if (status === 'ok') {

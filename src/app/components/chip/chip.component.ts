@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SharedService } from 'src/app/services/shared-service.service';
 
 @Component({
@@ -23,6 +23,7 @@ export class ChipComponent {
 
   clearChips() {
     this.dynamicSearch = [];
-    this.sharedService.setDynamicSearch(this.dynamicSearch);
+    this.sharedService.setDynamicSearch([]);
+    this.sharedService.clearChips();
   }
 }

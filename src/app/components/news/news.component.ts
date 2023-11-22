@@ -16,6 +16,7 @@ export class NewsComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   currentPage: number = 1;
   isDarkTheme = false;
+  showMessageDisplay = false
 
   constructor(private sharedService: SharedService, private themeService: ThemeService, private router: Router) {
     this.sharedService.showCards$.subscribe((value) => {
@@ -28,6 +29,12 @@ export class NewsComponent implements OnInit {
     });
     this.themeService.isDarkTheme.subscribe((isDark) => {
       this.isDarkTheme = isDark;
+    });
+    this.sharedService.clearChips$.subscribe(() => {
+      this.articles = [];
+      this.displayedArticles = [];
+      this.loadArticles();  
+      this.showMessageDisplay = false
     });
   }
 
@@ -43,6 +50,9 @@ export class NewsComponent implements OnInit {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.displayedArticles = this.articles.slice(startIndex, endIndex);
+    if(this.displayedArticles.length === 0){
+      this.showMessageDisplay = true
+    }
   }
 
   redirectToDetail(article: any): void {
@@ -50,4 +60,6 @@ export class NewsComponent implements OnInit {
       window.open(article.url, '_blank');
     }
   }
+
+
 }

@@ -6,14 +6,16 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class SharedService {
 
-  private showCardsSubject = new BehaviorSubject<boolean>(false);
-  showCards$ = this.showCardsSubject.asObservable();
-  private searchOptionsSubject: Subject<string> = new Subject<string>();
-  searchOptions$ = this.searchOptionsSubject.asObservable();
-  private articlesSource = new Subject<any>();
-  articles$ = this.articlesSource.asObservable();
   private searchSubject = new Subject<string>();
   private dynamicSearchSubject = new Subject<string[]>();
+  private clearChipsSubject = new Subject<void>();
+  private articlesSource = new Subject<any>();
+  private searchOptionsSubject: Subject<string> = new Subject<string>();
+  private showCardsSubject = new BehaviorSubject<boolean>(false);
+  clearChips$ = this.clearChipsSubject.asObservable();
+  showCards$ = this.showCardsSubject.asObservable();
+  searchOptions$ = this.searchOptionsSubject.asObservable();
+  articles$ = this.articlesSource.asObservable();
 
   setShowCards(value: boolean) {
     this.showCardsSubject.next(value);
@@ -43,5 +45,7 @@ export class SharedService {
   getSearchObservable() {
     return this.searchSubject.asObservable();
   }
-
+  clearChips() {
+    this.clearChipsSubject.next();
+  }
 }

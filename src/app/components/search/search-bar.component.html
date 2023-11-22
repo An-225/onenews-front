@@ -5,11 +5,11 @@
             <button mat-icon-button matSuffix aria-label="Pesquisar" (click)="onSearch()">
                 <mat-icon>search</mat-icon>
             </button>
-            <button *ngIf="!showDateRangeSelector" mat-icon-button matSuffix aria-label="Selecionar Data" (click)="openDateRangeSelector()">
+            <!-- <button *ngIf="!showDateRangeSelector" mat-icon-button matSuffix aria-label="Selecionar Data" (click)="openDateRangeSelector()">
                 <mat-icon>date_range</mat-icon>
-            </button>
+            </button> -->
         </mat-form-field>
-        <date *ngIf="showDateRangeSelector" (rangeSelected)="onDateRangeSelected($event)"></date>
+        <!-- <date *ngIf="showDateRangeSelector" (rangeSelected)="onDateRangeSelected($event)"></date> -->
     </div>
     <div>
         <mat-progress-bar mode="indeterminate" class="search-progress" *ngIf="showProgressBar"></mat-progress-bar>
