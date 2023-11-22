@@ -12,12 +12,10 @@ search {
     left: 0;
     width: 100%;
     z-index: 700;
-    background-color: white;
 }
 
 chip {
     position: fixed;
-    background-color: white;
     top: 15%;
     left: 0;
     width: 100%;
