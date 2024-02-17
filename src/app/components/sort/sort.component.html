@@ -1,0 +1,8 @@
+<mat-form-field>
+    <mat-label>Selecione uma opção:</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="handleMethodSelect()">
+        <mat-option value="relevancy" >Relevância</mat-option>
+        <mat-option value="popularity">Popularidade</mat-option>
+        <mat-option value="publishedAt">Data</mat-option>
+    </mat-select>
+</mat-form-field>

@@ -28,6 +28,8 @@ import {DateComponent} from './components/date/date.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DateFormatPipe} from './pipes/date-format.pipe';
 import {ThemeService} from './services/theme.service';
+import {SortComponent} from "./components/sort/sort.component";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
     declarations: [
@@ -39,7 +41,8 @@ import {ThemeService} from './services/theme.service';
         HomeComponent,
         TopicComponent,
         DateComponent,
-        DateFormatPipe
+        DateFormatPipe,
+        SortComponent
     ],
     imports: [
         RouterModule,
@@ -64,7 +67,8 @@ import {ThemeService} from './services/theme.service';
             enabled: !isDevMode(),
             registrationStrategy: 'registerWhenStable:30000'
         }),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatSelectModule
     ],
     providers: [ThemeService],
     bootstrap: [AppComponent]

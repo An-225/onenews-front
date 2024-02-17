@@ -15,9 +15,11 @@ export class SearchBarComponent {
     searchText: string = '';
     showProgressBar: boolean = false;
     showDateRangeSelector: boolean = false;
+    showSortSelector: boolean = false;
     dynamicSearch: string[] = [];
     startDate: Moment = moment().subtract(30, 'days');
     endDate: Moment = moment();
+    sortMethod: string = 'relevancy'
 
     constructor(private sharedService: SharedService, private searchService: SearchService) {
         this.sharedService.getDynamicSearchObservable().subscribe((dynamicSearch: string[]) => {
@@ -48,7 +50,7 @@ export class SearchBarComponent {
         let from = this.startDate.format('YYYY-MM-DD');
         let to = this.endDate.format('YYYY-MM-DD');
 
-        this.searchService.searchTopic(this.searchText, from, to).subscribe((data: any) => {
+        this.searchService.searchTopic(this.searchText, from, to, this.sortMethod).subscribe((data: any) => {
             const status = data.status;
 
             if (status === 'ok') {
@@ -80,4 +82,12 @@ export class SearchBarComponent {
         this.showDateRangeSelector = false;
     }
 
+    openSortSelector() {
+        this.showSortSelector = true;
+    }
+
+    onSortMethodSelected(method: String) {
+        this.sortMethod = method.toString()
+        this.showSortSelector = false;
+    }
 }
