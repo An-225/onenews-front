@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Fontes</h2>
+<mat-dialog-content class="mat-typography">
+    <mat-list>
+        <mat-selection-list #selectionList
+                            (selectionChange)="handleSourceSelect(selectionList.selectedOptions.selected)">
+            <mat-list-option *ngFor="let source of sources;" value="{{source.id}}"
+                             selected="{{selectedSources.includes(source.id)}}">{{ source.name }}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Ok</button>
+</mat-dialog-actions>

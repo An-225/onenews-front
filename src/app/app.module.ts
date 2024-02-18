@@ -30,6 +30,9 @@ import {DateFormatPipe} from './pipes/date-format.pipe';
 import {ThemeService} from './services/theme.service';
 import {SortComponent} from "./components/sort/sort.component";
 import {MatSelectModule} from "@angular/material/select";
+import {SourceComponent} from "./components/source/source.component";
+import {MatListModule} from "@angular/material/list";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
     declarations: [
@@ -42,7 +45,8 @@ import {MatSelectModule} from "@angular/material/select";
         TopicComponent,
         DateComponent,
         DateFormatPipe,
-        SortComponent
+        SortComponent,
+        SourceComponent
     ],
     imports: [
         RouterModule,
@@ -68,7 +72,9 @@ import {MatSelectModule} from "@angular/material/select";
             registrationStrategy: 'registerWhenStable:30000'
         }),
         ReactiveFormsModule,
-        MatSelectModule
+        MatSelectModule,
+        MatListModule,
+        MatDialogModule
     ],
     providers: [ThemeService],
     bootstrap: [AppComponent]

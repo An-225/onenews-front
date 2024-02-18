@@ -13,6 +13,10 @@
                     (click)="openSortSelector()">
                 <mat-icon>sort</mat-icon>
             </button>
+            <button mat-icon-button matSuffix aria-label="Selecionar Ordenação"
+                    (click)="openSourceSelector()">
+                <mat-icon>library_books</mat-icon>
+            </button>
         </mat-form-field>
         <date *ngIf="showDateRangeSelector" (rangeSelected)="onDateRangeSelected($event)"></date>
         <sort *ngIf="showSortSelector" (sortMethod)="onSortMethodSelected($event)"></sort>

@@ -10,15 +10,23 @@ export class SearchService {
     constructor(private http: HttpClient) {
     }
 
-    searchTopic(topic: string, from: string, to: string, sort: string): Observable<any> {
+    searchTopic(topic: string, from: string, to: string, sort: string, source: string | null): Observable<any> {
         const url = 'http://localhost:8080/api/v1/search';
-        const params = new HttpParams()
+        let params = new HttpParams()
             .set('topic', topic)
             .set('from', from)
             .set('to', to)
-            .set('sort', sort);
+            .set('sort', sort)
+
+        if (source != null)
+            params = params.set('source', source)
 
         return this.http.get(url, {params});
+    }
+
+    getSources(): Observable<any> {
+        const url = 'http://localhost:8080/api/v1/sources';
+        return this.http.get(url);
     }
 
 }

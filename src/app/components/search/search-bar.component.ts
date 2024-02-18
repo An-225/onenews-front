@@ -4,6 +4,8 @@ import {SearchService} from 'src/app/services/search.service';
 import * as moment from 'moment';
 import {FormGroup} from "@angular/forms";
 import {Moment} from "moment";
+import {MatDialog} from "@angular/material/dialog";
+import {SourceComponent} from "../source/source.component";
 
 @Component({
     selector: 'search',
@@ -20,8 +22,10 @@ export class SearchBarComponent {
     startDate: Moment = moment().subtract(30, 'days');
     endDate: Moment = moment();
     sortMethod: string = 'relevancy'
+    selectedSources: string[] = [];
+    sources: any[] = [];
 
-    constructor(private sharedService: SharedService, private searchService: SearchService) {
+    constructor(private sharedService: SharedService, private searchService: SearchService, private dialog: MatDialog) {
         this.sharedService.getDynamicSearchObservable().subscribe((dynamicSearch: string[]) => {
             this.dynamicSearch = dynamicSearch
         });
@@ -30,6 +34,10 @@ export class SearchBarComponent {
             this.searchText = chipValue
             this.onSearch();
         });
+
+        this.searchService.getSources().subscribe(value => {
+            this.sources = value.sources
+        })
     }
 
 
@@ -50,7 +58,9 @@ export class SearchBarComponent {
         let from = this.startDate.format('YYYY-MM-DD');
         let to = this.endDate.format('YYYY-MM-DD');
 
-        this.searchService.searchTopic(this.searchText, from, to, this.sortMethod).subscribe((data: any) => {
+        let source = this.selectedSources.length === 0 ? null : this.selectedSources.reduce((previousValue, currentValue) => previousValue.concat(',').concat(currentValue))
+
+        this.searchService.searchTopic(this.searchText, from, to, this.sortMethod, source).subscribe((data: any) => {
             const status = data.status;
 
             if (status === 'ok') {
@@ -86,8 +96,25 @@ export class SearchBarComponent {
         this.showSortSelector = true;
     }
 
+    openSourceSelector() {
+        const dialogRef = this.dialog.open(SourceComponent,
+            {
+                data: {
+                    'sources': this.sources,
+                    'selectedSources': this.selectedSources
+                }
+            });
+        dialogRef.componentInstance.sourcesSelected.subscribe(value => this.onSourceSelected(value))
+        dialogRef.afterClosed().subscribe(() => {
+        });
+    }
+
     onSortMethodSelected(method: String) {
         this.sortMethod = method.toString()
         this.showSortSelector = false;
+    }
+
+    onSourceSelected(selectedSources: string[]) {
+        this.selectedSources = selectedSources
     }
 }
