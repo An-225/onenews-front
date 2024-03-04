@@ -6,6 +6,7 @@ import {FormGroup} from "@angular/forms";
 import {Moment} from "moment";
 import {MatDialog} from "@angular/material/dialog";
 import {SourceComponent} from "../source/source.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'search',
@@ -13,19 +14,20 @@ import {SourceComponent} from "../source/source.component";
     styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent {
-
     searchText: string = '';
     showProgressBar: boolean = false;
     showDateRangeSelector: boolean = false;
     showSortSelector: boolean = false;
     dynamicSearch: string[] = [];
-    startDate: Moment = moment().subtract(30, 'days');
+    minStartDate: Moment = moment().subtract(1, 'months');
+    maxEndDate: Moment = moment();
+    startDate: Moment = moment().subtract(1, 'months');
     endDate: Moment = moment();
     sortMethod: string = 'relevancy'
     selectedSources: string[] = [];
     sources: any[] = [];
 
-    constructor(private sharedService: SharedService, private searchService: SearchService, private dialog: MatDialog) {
+    constructor(private sharedService: SharedService, private searchService: SearchService, private dialog: MatDialog, private snackBar: MatSnackBar) {
         this.sharedService.getDynamicSearchObservable().subscribe((dynamicSearch: string[]) => {
             this.dynamicSearch = dynamicSearch
         });
@@ -87,9 +89,16 @@ export class SearchBarComponent {
     }
 
     onDateRangeSelected(range: FormGroup) {
-        this.startDate = moment(range.value.start)
-        this.endDate = moment(range.value.end)
-        this.showDateRangeSelector = false;
+        let tempStartDate = moment(range.value.start);
+        let tempEndDate = moment(range.value.end);
+        if (tempStartDate.isBefore(this.minStartDate) || tempEndDate.isAfter(this.maxEndDate)) {
+            this.openSnackBar('O período máximo é de 1 meŝ', 'fechar')
+            this.showDateRangeSelector = false;
+            return;
+        }
+
+        this.startDate = tempStartDate
+        this.endDate = tempEndDate
     }
 
     openSortSelector() {
@@ -116,5 +125,9 @@ export class SearchBarComponent {
 
     onSourceSelected(selectedSources: string[]) {
         this.selectedSources = selectedSources
+    }
+
+    openSnackBar(message: string, action: string) {
+        this.snackBar.open(message, action);
     }
 }

@@ -33,6 +33,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {SourceComponent} from "./components/source/source.component";
 import {MatListModule} from "@angular/material/list";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
     declarations: [
@@ -74,7 +75,8 @@ import {MatDialogModule} from "@angular/material/dialog";
         ReactiveFormsModule,
         MatSelectModule,
         MatListModule,
-        MatDialogModule
+        MatDialogModule,
+        MatSnackBarModule
     ],
     providers: [ThemeService],
     bootstrap: [AppComponent]
