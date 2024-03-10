@@ -1,7 +1,23 @@
 <h2 mat-dialog-title>Filtros</h2>
-<mat-dialog-content class="mat-typography">
-    <p>teste</p>
+<mat-dialog-content class="mat-typography filter-content">
+    <h3>
+        <mat-icon>date_range</mat-icon>
+        Data:
+    </h3>
+    <date (rangeSelected)="onDateRangeSelected($event)"></date>
+
+    <h3>
+        <mat-icon>sort</mat-icon>
+        Ordem:
+    </h3>
+    <sort (sortMethod)="onSortMethodSelected($event)"></sort>
+
+    <button mat-raised-button matSuffix aria-label="Selecionar Ordenação"
+            (click)="openSourceSelector()">
+            <mat-icon>library_books</mat-icon>
+            Fontes
+    </button>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Ok</button>
+    <button mat-button mat-dialog-close (click)="onClose()">Ok</button>
 </mat-dialog-actions>

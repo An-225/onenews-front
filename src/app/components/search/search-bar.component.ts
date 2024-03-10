@@ -33,6 +33,7 @@ export class SearchBarComponent {
 
         this.searchService.getSources().subscribe(value => {
             this.sources = value.sources
+            this.openFiltersModal()
         })
     }
 
@@ -75,8 +76,21 @@ export class SearchBarComponent {
             }
         });
     }
+
     openFiltersModal() {
-        const dialogRef = this.dialog.open(FilterComponent);
+        const dialogRef = this.dialog.open(FilterComponent,
+            {
+                data: {
+                    'sources': this.sources,
+                    'selectedSources': this.selectedSources
+                }
+            });
+        dialogRef.componentInstance.filterChanged.subscribe(value => {
+            this.selectedSources = value.selectedSources;
+            this.startDate = value.startDate;
+            this.endDate = value.endDate;
+            this.sortMethod = value.sortMethod;
+        })
         dialogRef.afterClosed().subscribe(() => {
         });
     }

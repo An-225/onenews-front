@@ -6,7 +6,7 @@ import {Component, EventEmitter, Output} from "@angular/core";
     styleUrls: ['./sort.component.css']
 })
 export class SortComponent {
-    selected = ""
+    selected = "relevancy"
 
     handleMethodSelect() {
         this.sortMethod.emit(this.selected)
