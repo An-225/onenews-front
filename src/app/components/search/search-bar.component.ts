@@ -3,6 +3,8 @@ import {SharedService} from '../../services/shared-service.service';
 import {SearchService} from 'src/app/services/search.service';
 import * as moment from 'moment';
 import {Moment} from "moment";
+import {FilterComponent} from "../filter/filter.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'search',
@@ -19,7 +21,7 @@ export class SearchBarComponent {
     selectedSources: string[] = [];
     sources: any[] = [];
 
-    constructor(private sharedService: SharedService, private searchService: SearchService) {
+    constructor(private sharedService: SharedService, private searchService: SearchService, private dialog: MatDialog,) {
         this.sharedService.getDynamicSearchObservable().subscribe((dynamicSearch: string[]) => {
             this.dynamicSearch = dynamicSearch
         });
@@ -71,6 +73,11 @@ export class SearchBarComponent {
             } else {
                 this.showProgressBar = false;
             }
+        });
+    }
+    openFiltersModal() {
+        const dialogRef = this.dialog.open(FilterComponent);
+        dialogRef.afterClosed().subscribe(() => {
         });
     }
 }

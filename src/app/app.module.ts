@@ -34,6 +34,7 @@ import {SourceComponent} from "./components/source/source.component";
 import {MatListModule} from "@angular/material/list";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
         DateComponent,
         DateFormatPipe,
         SortComponent,
-        SourceComponent
+        SourceComponent,
+        FilterComponent
     ],
     imports: [
         RouterModule,
