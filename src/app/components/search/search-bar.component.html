@@ -5,21 +5,7 @@
             <button mat-icon-button matSuffix aria-label="Pesquisar" (click)="onSearch()">
                 <mat-icon>search</mat-icon>
             </button>
-            <button *ngIf="!showDateRangeSelector" mat-icon-button matSuffix aria-label="Selecionar Data"
-                    (click)="openDateRangeSelector()">
-                <mat-icon>date_range</mat-icon>
-            </button>
-            <button *ngIf="!showSortSelector" mat-icon-button matSuffix aria-label="Selecionar Ordenação"
-                    (click)="openSortSelector()">
-                <mat-icon>sort</mat-icon>
-            </button>
-            <button mat-icon-button matSuffix aria-label="Selecionar Ordenação"
-                    (click)="openSourceSelector()">
-                <mat-icon>library_books</mat-icon>
-            </button>
         </mat-form-field>
-        <date *ngIf="showDateRangeSelector" (rangeSelected)="onDateRangeSelected($event)"></date>
-        <sort *ngIf="showSortSelector" (sortMethod)="onSortMethodSelected($event)"></sort>
     </div>
     <div>
         <mat-progress-bar mode="indeterminate" class="search-progress" *ngIf="showProgressBar"></mat-progress-bar>
