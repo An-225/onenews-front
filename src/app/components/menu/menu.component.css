@@ -4,6 +4,7 @@
     left: 0;
     right: 0;
     z-index: 800;
+    width: 100%;
 }
 
 .mat-toolbar-row {
@@ -17,7 +18,7 @@
 }
 
 .dark-theme .dark-mode-button {
-    margin-left: auto; 
+    margin-left: auto;
 }
 
 .centered-text {
@@ -31,12 +32,12 @@
     margin-bottom: 10px;
 }
 
-.title{
+.title {
     font-size: 25px;
     font-weight: bold;
 }
 
 .mat-toolbar.dark-theme {
-    background-color: #121212; 
-    color: #ffffff; 
+    background-color: #121212;
+    color: #ffffff;
 }
